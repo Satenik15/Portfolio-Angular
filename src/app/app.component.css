@@ -1,0 +1,9 @@
+::ng-deep {
+    color: #2B478B;
+}
+
+::ng-deep.dark {
+    background-color: #000000;
+    color: #ffffff;
+}
+

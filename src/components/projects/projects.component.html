@@ -1,0 +1,57 @@
+<div id="projects" class="pt-10 md:pt-20 md:pb-10">
+    <div class="flex flex-col md:gap-2 text-center mx-auto w-fit pb-10">
+        <span class="section-header">My Projects</span>
+        <div class="w-full h-[1px] md:h-1 bg-gradient-to-r from-primary rounded-lg"></div>
+    </div>
+    <p class="text-sm md:text-xl my-8 text-center pb-5">
+        Showcasing a diverse range of projects that demonstrate mastery in <span class="text-primary">Frontend
+            Development</span>,
+        ranging from responsive web applications to interactive user interfaces.
+    </p>
+
+    <div class="flex flex-col gap-4">
+        @for (project of projects; track $index) {
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-20 py-5 md:py-10 lg:py-20"
+                [class.lg:flex-row-reverse]="$index % 2">
+                <div class="flex flex-col justify-center gap-4 md:gap-8 lg:w-1/2">
+                    <span class="text-lg md:text-3xl font-bold text-primary">{{ project.title }}</span>
+                    <span class="text-base md:text-2xl font-semibold text-primary">{{ project.timePeriod }}</span>
+                    <div class="text-xs md:text-base flex flex-col gap-4 md:gap-8 bg-violet-100 p-7 rounded-lg text-secondary">
+                        <div class="flex justify-between items-center">
+                            <span>{{ project.subTitle }}</span>
+                            <a class="pointer hover:underline text-primary" target="_blank" [href]="project.url">
+                                <lucide-angular [name]="externalLink" [size]="18"></lucide-angular>
+                            </a>
+                        </div>
+                        <span>{{ project.description }}</span>
+                        <div class="flex gap-4 items-start">
+                            <lucide-angular class="text-primary relative top-1" [name]="folderCog"></lucide-angular>
+                            <span>{{ project.technologies }}</span>
+                        </div>
+                    </div>
+                   
+                </div>
+                <img class="lg:max-w-[500px] w-full p-10" alt="project image" [src]="project.projectImg" />
+            </div>
+            <div class="w-full h-[1px] md:h-1 bg-gradient-to-r from-primary rounded-lg"></div>
+        }
+    </div>
+
+    <div class="pt-16 text-center">
+        <span class="font-semibold text-sm md:text-xl text-primary">Swipe to view more</span>
+    </div>
+
+    <swiper-container class="py-16" 
+                      [spaceBetween]="20" [slidesPerView]="isMobile ? 2 : 4" 
+                      [updateOnWindowResize]="true" [loop]="true">
+        @for (item of swiperData; track $index) {
+        <swiper-slide (click)="handleSlideClick(item)">
+            <img class="object-cover w-full cursor-pointer h-64 border-[1px] border-violet-200 rounded-lg" [src]="'assets/images/' + item.image" />
+        </swiper-slide>
+        }
+    </swiper-container>
+</div>
+
+<app-fullscreen-image *ngIf="fullscreenImageUrl" [imageUrl]="fullscreenImageUrl"
+    (closeFullScreen)="fullscreenImageUrl = ''"
+></app-fullscreen-image>

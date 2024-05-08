@@ -1,0 +1,5 @@
+<div class="fullscreen-image bg-gray-200 flex justify-end items-start" [ngStyle]="{ 'background-image': 'url(' + imageUrl + ')' }">
+    <button class="p-1 rounded-lg text-white bg-violet-300 hover:bg-violet-400 cursor-pointer m-3">
+        <lucide-angular [name]="icons.X" (click)="closeFullScreen.emit()"></lucide-angular>
+    </button>
+</div>

@@ -1,0 +1,29 @@
+<div id="skills" class="py-20">
+    <div class="flex items-center justify-center gap-8 pb-8 md:pb-20">
+        <div class="flex flex-col md:gap-2 text-center w-fit">
+            <span class="section-header">My skills</span>
+            <div class="w-full h-[1px] md:h-1 bg-gradient-to-r from-primary rounded-lg"></div>
+        </div>
+        <img src="assets/images/stars.png" alt="stars">
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        @for (skill of skills; track $index) {
+            <app-progress-bar [progress]="skill"></app-progress-bar>
+        }
+    </div>
+
+    <div class="flex flex-col md:gap-2 m-auto w-fit pt-20 md:pt-28">
+        <span class="section-header">Frontend Marvels</span>
+        <div class="w-full h-[1px] md:h-1 bg-gradient-to-r from-primary rounded-lg"></div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-1 pt-16 md:pb-8">
+        @for (responsibility of responsibilities; track $index) {
+            <div class="w-[350px] h-24 md:h-40 flex flex-col gap-4 items-center justify-center p-4 rounded-lg bg-violet-100">
+                <!-- <span class="section-header text-primary font-bold">{{ $index + 1 }}</span> -->
+                <lucide-angular [name]="responsibility.icon" class="text-primary"></lucide-angular>
+                <span class="text-xs md:text-xl font-medium text-center text-nowrap text-secondary">{{ responsibility.name }}</span>
+            </div>
+        }
+    </div>
+</div>

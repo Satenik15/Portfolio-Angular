@@ -1,0 +1,73 @@
+<nav class="fixed header top-0 left-0 w-full ">
+    <div class="flex justify-between items-center px-5 sm:px-10 py-5 m-auto 2xl:max-w-[1536px]">
+        <span class="font-bold text-lg">My Portfolio</span>
+
+        @if(!isMobile) {
+        <ul class="flex items-center gap-7 list-none text-base font-medium">
+            @for (item of headerSections; track $index) {
+            <li>
+                <button class="capitalize" (click)="scrollIntoView(item.name)">{{ item.name }}</button>
+            </li>
+            }
+        </ul>
+        }
+
+        <div class="flex items-center gap-8">
+            <div class="relative" appClickOutside [outsideClickEnabled]="isOpen"
+                (click)="isOpen = !isOpen; $event.preventDefault()"
+                (clickOutside)="isOpen = false">
+
+                <ng-container *ngIf="themeModeService.currentMode$ | async as mode">
+                    <lucide-angular class="cursor-pointer" id="menu-button" aria-expanded="true" aria-haspopup="true"
+                        [name]="mode === 'light' ? icons.Sun : icons.Moon"></lucide-angular>
+                </ng-container>
+
+                <div *ngIf="isOpen"
+                    class="menu origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    <div class="py-1" role="none">
+                        <button
+                            class="flex items-center gap-3 w-full p-3 text-base"
+                            role="menuitem" (click)="onChangeCurrentMode('light')">
+                            <lucide-angular [name]="icons.Sun" class="my-icon"></lucide-angular>
+                            <span>Light</span>
+                        </button>
+                        <button
+                            class="flex items-center gap-3 w-full p-3 text-base"
+                            role="menuitem" (click)="onChangeCurrentMode('dark')">
+                            <lucide-angular [name]="icons.Moon" [size]="18"></lucide-angular>
+                            <span class="ml-1">Dark</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            @if(isMobile) {
+            <div class="relative top-[2px]" appClickOutside [outsideClickEnabled]="isMenuOpen"
+                (click)="isMenuOpen = !isMenuOpen; $event.preventDefault()"
+                (clickOutside)="isMenuOpen = false">
+                <button>
+                    <lucide-angular [name]="icons.Menu"></lucide-angular>
+                </button>
+                <div *ngIf="isMenuOpen"
+                    class="menu origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    <div class="py-1" role="none">
+
+                        @for (item of headerSections; track $index) {
+                        <button
+                            class="flex items-center gap-3 w-full p-3 text-base capitalize"
+                            role="menuitem" (click)="scrollIntoView(item.name)">
+                            <lucide-angular class="my-icon" [size]="18" [name]="item.icon"></lucide-angular>
+                            <span>{{ item.name }}</span>
+                        </button>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            }
+            
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,24 @@
+.header {
+    background-color: #8B5CF6;
+    color: #ffffff;
+}
+
+.menu {
+    background-color: #ffffff;
+    color: #2B478B;
+}
+
+::ng-deep {
+    .dark {
+        .header {
+            background-color: #ede9fe;
+            color: #8B5CF6;
+        }
+
+        .menu {
+            background-color: #000000;
+            color: #ffffff;
+        }
+    }
+}
+
